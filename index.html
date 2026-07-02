@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danielle Silveira | Estética e Saúde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Italianno&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream-deep: #EFE1C6;
+    --cream: #F8EFDD;
+    --cream-light: #FDF9F1;
+    --gold: #B4863C;
+    --gold-soft: #D8B571;
+    --gold-line: #C9A15C;
+    --brown: #3A2A1B;
+    --brown-soft: #6B5842;
+    --white: #FFFFFF;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--cream);
+    color: var(--brown);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:'Playfair Display', serif;
+    color: var(--brown);
+    font-weight:600;
+  }
+
+  .script{
+    font-family:'Italianno', cursive;
+    color: var(--gold);
+    font-size:2.6rem;
+    line-height:1;
+    display:inline-block;
+  }
+
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  img{ display:block; max-width:100%; }
+
+  .container{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- decorative leaf flourish (signature element) ---------- */
+  .flourish{
+    width:64px; height:64px;
+    opacity:0.55;
+  }
+  .flourish path{ stroke:var(--gold); fill:none; stroke-width:1.4; }
+
+  .divider{
+    display:flex; align-items:center; justify-content:center;
+    gap:14px; margin: 18px 0 30px;
+  }
+  .divider .line{
+    height:1px; width:60px;
+    background: linear-gradient(to right, transparent, var(--gold-line));
+  }
+  .divider .line.right{ background: linear-gradient(to left, transparent, var(--gold-line)); }
+  .divider .mark{
+    width:16px; height:16px;
+    border:1.4px solid var(--gold);
+    transform: rotate(45deg);
+    position:relative;
+  }
+  .divider .mark::before{
+    content:'';
+    position:absolute; inset:4px;
+    border:1px solid var(--gold-soft);
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:100;
+    background: rgba(248,239,221,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid rgba(180,134,60,0.18);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px;
+    max-width:1120px; margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+    font-family:'Playfair Display', serif;
+  }
+  .brand-name{
+    font-size:1.05rem; letter-spacing:0.04em; color:var(--brown);
+    font-weight:600;
+  }
+  .brand-sub{
+    display:block;
+    font-family:'Jost', sans-serif;
+    font-size:0.6rem; letter-spacing:0.25em;
+    color: var(--gold); font-weight:500;
+  }
+  .brand-mark{
+    width:34px; height:34px;
+    border:1px solid var(--gold);
+    transform:rotate(45deg);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .brand-mark span{ transform:rotate(-45deg); color:var(--gold); font-size:1rem; }
+
+  .nav-links{
+    display:flex; gap:34px;
+    font-size:0.82rem; letter-spacing:0.05em;
+  }
+  .nav-links a{
+    position:relative; padding-bottom:4px;
+    color: var(--brown-soft);
+    transition:color .25s;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0;
+    width:0; height:1px; background:var(--gold);
+    transition:width .25s;
+  }
+  .nav-links a:hover{ color:var(--brown); }
+  .nav-links a:hover::after{ width:100%; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 26px;
+    background: var(--brown);
+    color: var(--cream-light) !important;
+    font-size:0.78rem; letter-spacing:0.08em;
+    border:1px solid var(--brown);
+    transition: all .3s;
+  }
+  .btn:hover{ background:transparent; color:var(--brown) !important; }
+  .btn.gold{ background:var(--gold); border-color:var(--gold); color:var(--white) !important; }
+  .btn.gold:hover{ background:transparent; color:var(--gold) !important; }
+
+  .nav-cta{ font-size:0.72rem; padding:10px 20px; }
+
+  .menu-toggle{ display:none; background:none; border:none; font-size:1.4rem; color:var(--brown); cursor:pointer; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:168px 0 90px;
+    background:
+      radial-gradient(circle at 85% 10%, rgba(216,181,113,0.28), transparent 45%),
+      radial-gradient(circle at 5% 90%, rgba(216,181,113,0.22), transparent 40%),
+      var(--cream);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr;
+    align-items:center; gap:40px;
+  }
+  .eyebrow{
+    font-size:0.72rem; letter-spacing:0.3em; color:var(--gold);
+    margin-bottom:18px; text-transform:uppercase;
+  }
+  .hero h1{
+    font-size:3.4rem; line-height:1.08;
+    margin-bottom:22px;
+    max-width:560px;
+  }
+  .hero h1 em{ font-style:normal; color:var(--gold); }
+  .hero p.lead{
+    font-size:1.02rem; color:var(--brown-soft);
+    max-width:440px; margin-bottom:34px;
+  }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
+  .hero-phone{
+    font-size:0.85rem; color:var(--brown-soft);
+    display:flex; align-items:center; gap:8px;
+  }
+
+  .hero-portrait{
+    position:relative;
+    justify-self:center;
+  }
+  .portrait-frame{
+    width:340px; position:relative;
+    border:1px solid var(--gold-soft);
+    padding:14px;
+  }
+  .portrait-frame img{
+    width:100%; height:420px; object-fit:cover; object-position: top center;
+  }
+  .portrait-frame::before{
+    content:'';
+    position:absolute; top:-14px; left:-14px;
+    width:44px; height:44px;
+    border-top:1.4px solid var(--gold);
+    border-left:1.4px solid var(--gold);
+  }
+  .portrait-frame::after{
+    content:'';
+    position:absolute; bottom:-14px; right:-14px;
+    width:44px; height:44px;
+    border-bottom:1.4px solid var(--gold);
+    border-right:1.4px solid var(--gold);
+  }
+  .portrait-badge{
+    position:absolute; bottom:-26px; left:-26px;
+    background: var(--brown); color:var(--cream-light);
+    padding:14px 20px;
+    font-family:'Playfair Display', serif;
+    font-size:0.8rem; letter-spacing:0.03em;
+    box-shadow: 0 10px 28px rgba(58,42,27,0.25);
+  }
+  .portrait-badge strong{ display:block; color:var(--gold-soft); font-size:0.68rem; letter-spacing:0.15em; font-weight:500; margin-bottom:2px;}
+
+  /* ---------- section shells ---------- */
+  section{ padding:100px 0; position:relative; }
+  .section-head{ text-align:center; max-width:620px; margin:0 auto 56px; }
+  .section-head .script{ margin-bottom:6px; }
+  .section-head h2{ font-size:2.3rem; }
+  .section-head p{ color:var(--brown-soft); margin-top:14px; font-size:0.98rem; }
+
+  /* ---------- about ---------- */
+  .about{ background: var(--cream-light); }
+  .about-grid{
+    display:grid; grid-template-columns: 0.85fr 1.15fr;
+    gap:64px; align-items:center;
+  }
+  .about-visual{
+    aspect-ratio: 4/5;
+    background: linear-gradient(160deg, var(--cream-deep), var(--cream));
+    border:1px solid var(--gold-soft);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .about-visual .brand-mark{ width:70px; height:70px; }
+  .about-visual .brand-mark span{ font-size:2rem; }
+  .about h2{ font-size:2.1rem; margin-bottom:20px; }
+  .about p{ color:var(--brown-soft); margin-bottom:16px; max-width:520px; }
+  .about-stats{
+    display:flex; gap:44px; margin-top:32px;
+  }
+  .about-stats div strong{
+    display:block; font-family:'Playfair Display',serif;
+    font-size:1.7rem; color:var(--gold);
+  }
+  .about-stats div span{ font-size:0.75rem; letter-spacing:0.05em; color:var(--brown-soft); }
+
+  /* ---------- services ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background: rgba(180,134,60,0.25);
+    border:1px solid rgba(180,134,60,0.25);
+  }
+  .service-card{
+    background: var(--cream-light);
+    padding:34px 30px;
+    transition: background .3s;
+  }
+  .service-card:hover{ background: var(--white); }
+  .service-mark{ color:var(--gold); font-size:1rem; margin-bottom:14px; display:block; }
+  .service-card h3{
+    font-family:'Playfair Display', serif; font-size:1.08rem;
+    font-weight:600; margin-bottom:10px;
+  }
+  .service-card p{ color:var(--brown-soft); font-size:0.88rem; }
+
+  /* ---------- gallery ---------- */
+  .gallery{ background: var(--cream-light); }
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+  }
+  .result-card{
+    border:1px solid var(--gold-soft);
+    padding:16px;
+    background: var(--cream);
+  }
+  .result-compare{
+    display:grid; grid-template-columns:1fr 1fr; gap:2px;
+    margin-bottom:14px;
+  }
+  .result-slot{
+    aspect-ratio: 3/4;
+    background: repeating-linear-gradient(135deg, var(--cream-deep), var(--cream-deep) 8px, var(--cream) 8px, var(--cream) 16px);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:10px;
+  }
+  .result-slot span{
+    font-size:0.68rem; letter-spacing:0.1em; color:var(--brown-soft); text-transform:uppercase;
+  }
+  .result-card h4{ font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:600; }
+  .result-note{
+    text-align:center; margin-top:36px; font-size:0.85rem; color:var(--brown-soft);
+    font-style:italic;
+  }
+
+  /* ---------- cta band ---------- */
+  .cta-band{
+    background: var(--brown);
+    color: var(--cream-light);
+    text-align:center;
+    padding:80px 0;
+  }
+  .cta-band .script{ color:var(--gold-soft); }
+  .cta-band h2{ color:var(--cream-light); font-size:2.1rem; margin:6px 0 18px; }
+  .cta-band p{ color:#D9CBB4; max-width:480px; margin:0 auto 34px; }
+
+  /* ---------- footer ---------- */
+  footer{ padding:70px 0 40px; }
+  .footer-grid{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr;
+    gap:40px; margin-bottom:50px;
+  }
+  footer h4{
+    font-family:'Playfair Display',serif; font-size:0.95rem; margin-bottom:16px; color:var(--brown);
+  }
+  footer p, footer li{ color:var(--brown-soft); font-size:0.86rem; margin-bottom:10px; }
+  .footer-bottom{
+    border-top:1px solid rgba(180,134,60,0.25);
+    padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.75rem; color:var(--brown-soft); flex-wrap:wrap; gap:12px;
+  }
+
+  /* ---------- whatsapp float ---------- */
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:200;
+    background:#3A2A1B; color:var(--cream-light);
+    width:56px; height:56px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px rgba(58,42,27,0.35);
+    border:1px solid var(--gold);
+    transition: transform .25s;
+  }
+  .wa-float:hover{ transform: scale(1.08); }
+
+  @media (max-width: 860px){
+    .nav-links, .nav-cta{ display:none; }
+    .menu-toggle{ display:block; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero h1{ font-size:2.4rem; }
+    .hero-portrait{ margin-top:50px; }
+    .about-grid{ grid-template-columns:1fr; }
+    .services-grid{ grid-template-columns:repeat(2,1fr); }
+    .gallery-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; gap:28px; }
+    .container{ padding:0 22px; }
+  }
+  @media (max-width:480px){
+    .services-grid{ grid-template-columns:1fr; }
+    .portrait-frame{ width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-mark"><span>&#10058;</span></div>
+      <div>
+        <span class="brand-name">Danielle Silveira</span>
+        <span class="brand-sub">ESTÉTICA E SAÚDE</span>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#procedimentos">Procedimentos</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn gold nav-cta" href="https://wa.me/5551985957429" target="_blank" rel="noopener">Agendar consulta</a>
+    <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Biomédica esteta · CRBM ativo</div>
+      <h1>Cuidado que revela <em>a sua melhor versão</em>, com técnica e sensibilidade.</h1>
+      <p class="lead">Procedimentos faciais e corporais conduzidos por uma biomédica especialista, em um atendimento próximo, seguro e pensado para resultados naturais.</p>
+      <div class="hero-actions">
+        <a class="btn gold" href="https://wa.me/5551985957429" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        <a class="btn" style="background:transparent;color:var(--brown) !important;border-color:var(--brown);" href="#procedimentos">Ver procedimentos</a>
+      </div>
+      <div class="hero-phone" style="margin-top:28px;">&#9742; (51) 98595-7429</div>
+    </div>
+    <div class="hero-portrait">
+      <div class="portrait-frame">
+        <img src="danielle_portrait.jpg" alt="Dra. Danielle Silveira, biomédica esteta">
+        <div class="portrait-badge"><strong>DRA. DANIELLE</strong>Biomédica · Estética Avançada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="sobre">
+  <div class="container about-grid">
+    <div class="about-visual">
+      <div class="brand-mark"><span>&#10058;</span></div>
+    </div>
+    <div>
+      <span class="script">Sobre</span>
+      <h2>Uma biomédica dedicada à estética que respeita cada rosto</h2>
+      <p>Danielle Silveira é biomédica com atuação voltada à estética facial e capilar. Une conhecimento técnico e olhar clínico a um atendimento humanizado, avaliando cada caso de forma individual antes de qualquer procedimento.</p>
+      <p>O consultório funciona hoje de forma independente, com planos de expansão para uma clínica própria — o próximo passo de uma trajetória construída com cuidado, estudo constante e resultados que falam por si.</p>
+      <div class="about-stats">
+        <div><strong>10+</strong><span>procedimentos oferecidos</span></div>
+        <div><strong>100%</strong><span>atendimento personalizado</span></div>
+        <div><strong>CRBM</strong><span>registro profissional ativo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="procedimentos">
+  <div class="container">
+    <div class="section-head">
+      <span class="script">Procedimentos</span>
+      <h2>Conheça os tratamentos</h2>
+      <p>Protocolos faciais e capilares indicados após avaliação individual, sempre com foco em naturalidade e segurança.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Preenchimentos Faciais</h3><p>Harmonização de contornos e volumes com ácido hialurônico.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Botox</h3><p>Suavização de linhas de expressão preservando a naturalidade.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Preenchimento Labial</h3><p>Volume e contorno equilibrados ao formato do rosto.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Rinomodelação</h3><p>Ajuste estético do nariz sem procedimento cirúrgico.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Bioestimuladores de Colágeno</h3><p>Estímulo de produção natural de colágeno para firmeza da pele.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Microagulhamento</h3><p>Renovação da textura e viço da pele.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Limpeza de Pele</h3><p>Higienização profunda e cuidado preventivo da pele.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Lipo Enzimática</h3><p>Redução localizada de gordura com aplicação de enzimas.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Tratamento Capilar</h3><p>Protocolos para fortalecimento e saúde dos fios.</p></div>
+      <div class="service-card"><span class="service-mark">&#10022;</span><h3>Secagem de Microvasos</h3><p>Tratamento estético de pequenos vasos sanguíneos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="resultados">
+  <div class="container">
+    <div class="section-head">
+      <span class="script">Resultados</span>
+      <h2>Antes & Depois</h2>
+      <p>Espaço reservado para os registros reais dos atendimentos — substitua os quadros abaixo pelas fotos autorizadas pelas pacientes.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="result-card">
+        <div class="result-compare">
+          <div class="result-slot"><span>Foto&nbsp;Antes</span></div>
+          <div class="result-slot"><span>Foto&nbsp;Depois</span></div>
+        </div>
+        <h4>Preenchimento Labial</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-compare">
+          <div class="result-slot"><span>Foto&nbsp;Antes</span></div>
+          <div class="result-slot"><span>Foto&nbsp;Depois</span></div>
+        </div>
+        <h4>Harmonização Facial</h4>
+      </div>
+      <div class="result-card">
+        <div class="result-compare">
+          <div class="result-slot"><span>Foto&nbsp;Antes</span></div>
+          <div class="result-slot"><span>Foto&nbsp;Depois</span></div>
+        </div>
+        <h4>Bioestimulador de Colágeno</h4>
+      </div>
+    </div>
+    <p class="result-note">Todas as imagens divulgadas são publicadas mediante autorização prévia das pacientes.</p>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="container">
+    <span class="script">Vamos conversar</span>
+    <h2>Agende sua avaliação</h2>
+    <p>Atendimento por WhatsApp para tirar dúvidas e marcar seu horário — resposta rápida, sem compromisso.</p>
+    <a class="btn gold" href="https://wa.me/5551985957429" target="_blank" rel="noopener">Chamar no WhatsApp &#8594;</a>
+  </div>
+</div>
+
+<footer id="contato">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:16px;">
+          <div class="brand-mark"><span>&#10058;</span></div>
+          <div>
+            <span class="brand-name">Danielle Silveira</span>
+            <span class="brand-sub">ESTÉTICA E SAÚDE</span>
+          </div>
+        </div>
+        <p style="max-width:280px;">Estética facial e capilar conduzida por uma biomédica, com atendimento individualizado em cada etapa.</p>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li>&#9742; (51) 98595-7429</li>
+          <li>&#9993; contato@daniellesilveira.com.br</li>
+          <li>Porto Alegre — RS</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#procedimentos">Procedimentos</a></li>
+          <li><a href="#resultados">Resultados</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Danielle Silveira Estética e Saúde. Todos os direitos reservados.</span>
+      <span>Feito com cuidado para acompanhar o crescimento do seu consultório.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5551985957429" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2.01 6.476 2.01 11.994c0 2.114.649 4.076 1.76 5.696L2 22l4.44-1.744a9.94 9.94 0 0 0 5.564 1.674h.005c5.518 0 9.994-4.476 9.994-9.994C21.999 6.476 17.523 2 12.004 2zm0 18.09h-.004a8.09 8.09 0 0 1-4.126-1.13l-.296-.176-3.062 1.204.815-3.096-.193-.318a8.078 8.078 0 0 1-1.24-4.582c0-4.47 3.638-8.108 8.11-8.108 2.166 0 4.202.845 5.734 2.378a8.05 8.05 0 0 1 2.373 5.735c0 4.472-3.638 8.093-8.111 8.093z"/></svg>
+</a>
+
+<script>
+  document.querySelectorAll('.nav-links a, .footer-grid a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href');
+      const target = document.querySelector(id);
+      if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+</script>
+
+</body>
+</html>
