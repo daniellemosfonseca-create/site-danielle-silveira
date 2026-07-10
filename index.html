@@ -370,8 +370,52 @@
   .result-photo{
     width:100%; aspect-ratio:3/4; object-fit:cover;
     margin-bottom:14px;
+    cursor:zoom-in; transition: filter .3s;
   }
+  .result-card{ position:relative; }
+  .result-card:hover .result-photo{ filter:brightness(0.94); }
+  .zoom-hint{
+    position:absolute; top:26px; right:26px;
+    width:32px; height:32px; background:rgba(58,42,27,0.65);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    color:var(--cream-light); font-size:0.85rem; pointer-events:none;
+    opacity:0; transition:opacity .25s;
+  }
+  .result-card:hover .zoom-hint{ opacity:1; }
   .result-card h4{ font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:600; }
+
+  /* ---------- image lightbox / zoom ---------- */
+  .lightbox-overlay{
+    position:fixed; inset:0; z-index:400;
+    background: rgba(20,14,9,0.88);
+    display:none; align-items:center; justify-content:center;
+    padding:30px;
+  }
+  .lightbox-overlay.open{ display:flex; }
+  .lightbox-content{
+    position:relative; max-width:min(90vw, 640px); max-height:88vh;
+    animation: modalIn .25s ease;
+  }
+  .lightbox-content img{
+    width:100%; height:100%; max-height:88vh; object-fit:contain;
+    border:1px solid var(--gold-soft);
+  }
+  .lightbox-caption{
+    text-align:center; color:var(--cream-light); font-family:'Playfair Display',serif;
+    margin-top:14px; font-size:1rem; letter-spacing:0.02em;
+  }
+  .lightbox-close{
+    position:absolute; top:-46px; right:0;
+    width:36px; height:36px; border:1px solid var(--gold-soft); background:transparent;
+    color:var(--cream-light); font-size:1.1rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: all .2s;
+  }
+  .lightbox-close:hover{ background:var(--gold); color:var(--brown); border-color:var(--gold); }
+  .lightbox-hint{
+    text-align:center; color:var(--gold-soft); font-size:0.72rem; letter-spacing:0.08em;
+    margin-top:8px; text-transform:uppercase;
+  }
   .result-note{
     text-align:center; margin-top:36px; font-size:0.85rem; color:var(--brown-soft);
     font-style:italic;
@@ -471,7 +515,7 @@
     </div>
     <div class="hero-portrait">
       <div class="portrait-frame">
-        <img src="danielle_portrait.jpg" alt="Dra. Danielle Silveira, biomédica esteta">
+        <img src="danielle_portrait_v2.jpg" alt="Dra. Danielle Silveira, biomédica esteta">
       </div>
     </div>
   </div>
@@ -481,7 +525,7 @@
   <div class="container about-grid">
     <div>
       <div class="about-visual">
-        <img src="danielle_about.jpg" alt="Dra. Danielle Silveira">
+        <img src="danielle_about_v2.jpg" alt="Dra. Danielle Silveira">
         <div class="brand-mark"><span>&#10058;</span></div>
       </div>
       <div class="about-badge"><strong>DRA. DANIELLE</strong>Biomédica · Estética Avançada</div>
@@ -489,8 +533,8 @@
     <div>
       <span class="script">Sobre</span>
       <h2>Uma biomédica dedicada à estética que respeita cada rosto</h2>
-      <p>Danielle Silveira é biomédica com atuação voltada à estética facial e capilar. Une conhecimento técnico e olhar clínico a um atendimento humanizado, avaliando cada caso de forma individual antes de qualquer procedimento.</p>
-      <p>O consultório funciona hoje de forma independente, com planos de expansão para uma clínica própria — o próximo passo de uma trajetória construída com cuidado, estudo constante e resultados que falam por si.</p>
+      <p>Danielle Silveira é biomédica com atuação voltada à estética facial e corporal. Une conhecimento técnico e olhar clínico a um atendimento humanizado, avaliando cada caso de forma individual antes de qualquer procedimento.</p>
+      <p>Cada atendimento é conduzido com atenção aos detalhes e compromisso com a qualidade, refletindo uma trajetória construída com cuidado, estudo constante e resultados que falam por si.</p>
       <div class="about-stats">
         <div><strong>10+</strong><span>procedimentos oferecidos</span></div>
         <div><strong>100%</strong><span>atendimento personalizado</span></div>
@@ -531,15 +575,18 @@
     </div>
     <div class="gallery-grid">
       <div class="result-card">
-        <img class="result-photo" src="result_labial.jpg" alt="Antes e depois de preenchimento labial">
+        <img class="result-photo" src="result_labial.jpg" alt="Antes e depois de preenchimento labial" data-caption="Preenchimento Labial">
+        <span class="zoom-hint">&#128269;</span>
         <h4>Preenchimento Labial</h4>
       </div>
       <div class="result-card">
-        <img class="result-photo" src="result_harmonizacao_1.jpg" alt="Antes e depois de harmonização facial">
+        <img class="result-photo" src="result_harmonizacao_1.jpg" alt="Antes e depois de harmonização facial" data-caption="Harmonização Facial">
+        <span class="zoom-hint">&#128269;</span>
         <h4>Harmonização Facial</h4>
       </div>
       <div class="result-card">
-        <img class="result-photo" src="result_harmonizacao_2.jpg" alt="Antes e depois de aplicação de botox">
+        <img class="result-photo" src="result_harmonizacao_2.jpg" alt="Antes e depois de aplicação de botox" data-caption="Botox">
+        <span class="zoom-hint">&#128269;</span>
         <h4>Botox</h4>
       </div>
     </div>
@@ -567,7 +614,7 @@
             <span class="brand-sub">ESTÉTICA E SAÚDE</span>
           </div>
         </div>
-        <p style="max-width:280px;">Estética facial e capilar conduzida por uma biomédica, com atendimento individualizado em cada etapa.</p>
+        <p style="max-width:280px;">Estética facial e corporal conduzida por uma biomédica, com atendimento individualizado em cada etapa.</p>
       </div>
       <div>
         <h4>Contato</h4>
@@ -618,6 +665,15 @@
     <div class="modal-cta">
       <a class="btn gold" href="https://wa.me/5551985957429" target="_blank" rel="noopener">Perguntar no WhatsApp</a>
     </div>
+  </div>
+</div>
+
+<div class="lightbox-overlay" id="imgLightbox">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&#10005;</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <div class="lightbox-hint">Toque fora da imagem para fechar</div>
   </div>
 </div>
 
@@ -706,6 +762,23 @@
   document.getElementById('procModalClose').addEventListener('click', ()=> modal.classList.remove('open'));
   modal.addEventListener('click', e=>{ if(e.target === modal) modal.classList.remove('open'); });
   document.addEventListener('keydown', e=>{ if(e.key === 'Escape') modal.classList.remove('open'); });
+
+  const lightbox = document.getElementById('imgLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+
+  document.querySelectorAll('.result-photo').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      lightboxImg.src = img.getAttribute('src');
+      lightboxImg.alt = img.getAttribute('alt');
+      lightboxCaption.textContent = img.getAttribute('data-caption') || '';
+      lightbox.classList.add('open');
+    });
+  });
+
+  document.getElementById('lightboxClose').addEventListener('click', ()=> lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', e=>{ if(e.target === lightbox) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', e=>{ if(e.key === 'Escape') lightbox.classList.remove('open'); });
 </script>
 
 <script>
