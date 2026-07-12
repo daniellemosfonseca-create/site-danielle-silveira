@@ -260,7 +260,7 @@
   }
   .featured-slide::before{
     content:''; position:absolute; inset:0;
-    background:linear-gradient(90deg, rgba(42,29,18,.94) 0%, rgba(58,42,27,.82) 39%, rgba(58,42,27,.24) 72%, rgba(58,42,27,.12) 100%);
+    background:linear-gradient(90deg, rgba(42,29,18,.94) 0%, rgba(58,42,27,.78) 42%, rgba(58,42,27,.18) 68%, rgba(58,42,27,.03) 100%);
   }
   .featured-slide::after{
     content:''; position:absolute; inset:22px;
@@ -269,9 +269,16 @@
   }
   .featured-slide.is-active{ opacity:1; visibility:visible; transform:scale(1); z-index:1; }
   .featured-slide.labial{ background-image:url('assets/banner/preenchimento-labial.jpg'); background-position:center 42%; }
-  .featured-slide.botox{ background-image:url('assets/banner/botox.jpg'); background-position:center 32%; }
-  .featured-slide.bio{ background-image:url('assets/banner/bioestimulador.jpg'); background-position:center 40%; }
-  .featured-slide.harmonizacao{ background-image:url('assets/banner/harmonizacao.jpg'); background-position:center 32%; }
+  .featured-slide.botox,
+  .featured-slide.bio,
+  .featured-slide.harmonizacao{
+    background-repeat:no-repeat;
+    background-size:auto 100%;
+    background-position:right center;
+  }
+  .featured-slide.botox{ background-image:url('assets/banner/botox.jpg'); }
+  .featured-slide.bio{ background-image:url('assets/banner/bioestimulador.jpg'); }
+  .featured-slide.harmonizacao{ background-image:url('assets/banner/harmonizacao.jpg'); }
   .featured-content{ position:relative; z-index:2; width:min(100%,1120px); margin:0 auto; padding:72px 92px 78px; color:var(--cream-light); }
   .featured-kicker{ display:flex; align-items:center; gap:10px; font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:18px; }
   .featured-kicker::before{ content:''; width:30px; height:1px; background:var(--gold-soft); }
@@ -544,7 +551,10 @@
     .container{ padding:0 22px; }
     .featured-carousel{ min-height:580px; }
     .featured-content{ padding:80px 54px 110px; }
-    .featured-slide::before{ background:linear-gradient(90deg, rgba(42,29,18,.94), rgba(58,42,27,.66)); }
+    .featured-slide::before{ background:linear-gradient(90deg, rgba(42,29,18,.94), rgba(58,42,27,.48), rgba(58,42,27,.12)); }
+    .featured-slide.botox,
+    .featured-slide.bio,
+    .featured-slide.harmonizacao{ background-size:cover; background-position:center; }
   }
   @media (max-width:480px){
     .services-grid{ grid-template-columns:1fr; }
